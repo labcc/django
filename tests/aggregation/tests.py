@@ -2209,6 +2209,7 @@ class AggregateAnnotationPruningTests(TestCase):
         self.assertEqual(sql.count("select"), 3, "Subquery wrapping required")
         self.assertEqual(aggregate, {"sum_total_books": 3})
 
+
 @skipUnlessDBFeature("supports_over_clause")
 def test_referenced_window_requires_wrapping(self):
     total_books_qs = Book.objects.annotate(
