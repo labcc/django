@@ -77,7 +77,7 @@ class Aggregate(Func):
             # returning self.filter and including that in this loop.
             expressions = super(Aggregate, c).get_source_expressions()
             for index, expr in enumerate(expressions):
-                if expr.contains_aggregate:
+                if expr.contains_aggregate and not (getattr(expr, 'window_compatible', False) or getattr(expr, 'window_function', False)):
                     before_resolved = self.get_source_expressions()[index]
                     name = (
                         before_resolved.name
